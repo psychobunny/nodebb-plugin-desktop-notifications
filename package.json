@@ -1,0 +1,31 @@
+{
+  "name": "nodebb-plugin-desktop-notifications",
+  "version": "0.0.1",
+  "description": "NodeBB Desktop Notifications",
+  "main": "library.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/psychobunny/nodebb-plugin-desktop-notifications"
+  },
+  "keywords": [
+    "nodebb",
+    "plugin",
+    "notifications",
+    "desktop",
+    "alerts"
+  ],
+  "author": {
+    "name": "psychobunny",
+    "email": "psycho.bunny@hotmail.com"
+  },
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/psychobunny/nodebb-plugin-desktop-notifications/issues"
+  },
+  "readmeFilename": "README.md",
+  "_id": "nodebb-plugin-desktop-notifications@0.0.1",
+  "_from": "nodebb-plugin-desktop-notifications@~0.0.1"
+}
