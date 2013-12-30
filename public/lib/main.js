@@ -30,9 +30,9 @@
 							ajaxify.go(data.path.substring(1));
 						}
 					});
-				});
 
-				notification.show();
+					notification.show();
+				});
 			}
 		});
 	});
