@@ -1,12 +1,18 @@
 (function() {
 	"use strict";
 
+	function requestPermission() {
+		(new Notify('NodeBB')).requestPermission();
+	}
+
 	jQuery('document').ready(function() {
 		require(['notify'], function(Notify) {
 			var logo = $('.forum-logo').attr('src');
 
+			requestPermission();
+
 			jQuery('#notif_dropdown').on('click', function() {
-				(new Notify('NodeBB')).requestPermission();
+				requestPermission();
 			});
 			
 			socket.on('event:new_notification', function(data) {
