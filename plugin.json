@@ -7,5 +7,6 @@
 	"scripts": [
 		"public/vendor/notify/notify.js",
 		"public/lib/main.js"
-	]
+	],
+	"minver": "0.4.0"
 }
