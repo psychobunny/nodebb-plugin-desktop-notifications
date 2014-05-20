@@ -4,10 +4,9 @@
 	"description": "Uses the HTML5 Notifications API to display desktop alerts upon new incoming notifications.",
 	"url": "https://github.com/psychobunny/nodebb-plugin-desktop-notifications",
 	"library": "./library.js",
-	"hooks": [
-		{
-			"hook": "filter:scripts.get", "method": "addScripts", "callbacked": false
-		}
+	"scripts": [
+		"public/vendor/notify/notify.js",
+		"public/lib/main.js"
 	],
-	"staticDir": "./public"
+	"minver": "0.4.0"
 }
