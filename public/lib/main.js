@@ -27,7 +27,7 @@
 
 			translator.translate(data.text, function(translated) {
 				require(['notify'], function(Notify) {
-					var notification = new Notify('NodeBB', {
+					var notification = new Notify(config.siteTitle, {
 						body: translated.replace(/<strong>/g, '').replace(/<\/strong>/g, ''),
 						icon: logo,
 						notifyClick: function() {
