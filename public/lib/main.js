@@ -21,17 +21,22 @@
 		});
 		
 		socket.on('event:new_notification', function(data) {
-			if (!data || !data.text) {
+			if (!data) {
 				return;
 			}
-
-			translator.translate(data.text, function(translated) {
+			var text = data.bodyShort || data.text;
+			if (!text) {
+				return;
+			}
+			translator.translate(text, function(translated) {
 				require(['notify'], function(Notify) {
 					var notification = new Notify(config.siteTitle, {
 						body: translated.replace(/<strong>/g, '').replace(/<\/strong>/g, ''),
 						icon: logo,
 						notifyClick: function() {
-							ajaxify.go(data.path.substring(1));
+							if (data.path) {
+								ajaxify.go(data.path.substring(1));
+							}
 						}
 					});
 					notification.show();
