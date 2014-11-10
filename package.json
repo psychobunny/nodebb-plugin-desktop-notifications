@@ -25,6 +25,9 @@
   "bugs": {
     "url": "https://github.com/psychobunny/nodebb-plugin-desktop-notifications/issues"
   },
+  "nbbpm": {
+    "compatibility": "^0.6.0"
+  },
   "readmeFilename": "README.md",
   "_id": "nodebb-plugin-desktop-notifications@0.0.1",
   "_from": "nodebb-plugin-desktop-notifications@~0.0.1"
