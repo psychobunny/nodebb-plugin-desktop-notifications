@@ -45,6 +45,24 @@
 						}
 					});
 					notification.show();
+
+					
+					if (data.tid) {
+						$(window).on('action:ajaxify.start', removeNotif);
+						setTimeout(function() {
+							$(window).off('action:ajaxify.start', removeNotif);
+						}, 5000);
+					}
+
+					function removeNotif(ev, ajx) {
+						var tid = ajx.url.match(/topic\/([\d+])/);
+
+						if (tid) {
+							if (parseInt(data.tid, 10) === parseInt(tid[1], 10)) {
+								notification.close();
+							}
+						}
+					}
 				});
 			});
 		});
