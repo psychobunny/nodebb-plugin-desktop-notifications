@@ -2,6 +2,10 @@
 	"use strict";
 
 	function requestPermission() {
+		if (parseInt(app.user.uid, 10) === 0) {
+			return;
+		}
+
 		require(['notify'], function(Notify) {
 			(new Notify('NodeBB')).requestPermission();
 		});
