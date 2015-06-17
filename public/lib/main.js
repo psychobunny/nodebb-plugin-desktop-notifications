@@ -7,7 +7,7 @@
 		}
 
 		require(['notify'], function(Notify) {
-			(new Notify('NodeBB')).requestPermission();
+			Notify.requestPermission();
 		});
 	}
 
@@ -37,7 +37,7 @@
 					var notification = new Notify(config.siteTitle, {
 						body: translated.replace(/<strong>/g, '').replace(/<\/strong>/g, ''),
 						icon: logo,
-						timeout: 5000,
+						timeout: 5,
 						notifyClick: function() {
 							if (data.path) {
 								ajaxify.go(data.path.substring(1));
