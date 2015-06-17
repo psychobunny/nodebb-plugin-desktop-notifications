@@ -17,14 +17,6 @@
 		var logo = $('.forum-logo').attr('src');
 
 		requestPermission();
-
-		jQuery('#notif_dropdown').on('click', function() {
-			requestPermission();
-		});
-
-		jQuery('*').on('click', function() {
-			requestPermission();
-		});
 		
 		socket.on('event:new_notification', function(data) {
 			if (!data) {
