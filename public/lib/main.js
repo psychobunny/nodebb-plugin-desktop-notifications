@@ -1,3 +1,5 @@
+/*globals app, user, socket, translator, config, ajaxify*/
+
 (function() {
 	"use strict";
 
