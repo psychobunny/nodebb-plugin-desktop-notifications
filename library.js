@@ -1,9 +1,13 @@
 (function(module) {
 	"use strict";
 
-	var Notifications = {};
+	var Notifications = {},
+		app;
 
-	// lol.
+	Notifications.onLoad = function(params, callback) {
+		app = params.app;
+		callback();
+	};
 
 	module.exports = Notifications;
 }(module));

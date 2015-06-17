@@ -1,15 +1,48 @@
-/*globals app, user, socket, translator, config, ajaxify*/
+/*globals app, user, socket, translator, config, ajaxify, templates*/
 
 (function() {
 	"use strict";
+
+	var notifications = {
+		ignore: false,
+		originalPadding: 0
+	};
 
 	function requestPermission() {
 		if (parseInt(app.user.uid, 10) === 0) {
 			return;
 		}
 
-		require(['notify'], function(Notify) {
-			Notify.requestPermission();
+		function hideAlertBar() {
+			notifications.ignore = true;
+			$('.desktop-notification-permission').hide();
+			if (notifications.originalPadding) {
+				$('body').css('padding-top', notifications.originalPadding + 'px');
+			}
+		}
+
+		require(['notify', 'components'], function(Notify, components) {
+			function request() {
+				Notify.requestPermission(hideAlertBar, hideAlertBar);
+			}
+
+			request();
+
+			if (!notifications.ignore && Notify.permissionLevel !== 'granted') {
+				templates.parse('partials/nodebb-plugin-desktop-notifications/alert-bar', {siteTitle: config.siteTitle}, function(tpl) {
+					components.get('navbar').prepend($(tpl));
+
+					notifications.originalPadding = parseInt($('body').css('padding-top'), 10);
+
+					$('body').css('padding-top', notifications.originalPadding + parseInt($('.desktop-notification-permission').outerHeight()) + 'px');
+
+					$('.activate-notifications').click(function() {
+						request();
+					});
+
+					$('.deactivate-notifications').click(hideAlertBar);
+				});
+			}
 		});
 	}
 

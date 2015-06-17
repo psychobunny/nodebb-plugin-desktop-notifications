@@ -5,8 +5,17 @@
 	"url": "https://github.com/psychobunny/nodebb-plugin-desktop-notifications",
 	"library": "./library.js",
 	"scripts": [
-		"public/vendor/notify/notify.js",
-		"public/lib/main.js"
+	"public/vendor/notify/notify.js",
+	"public/lib/main.js"
 	],
-	"minver": "0.4.0"
+	"minver": "0.4.0",
+	"less": [
+	"public/less/default.less"
+	],
+	"templates": "./public/templates",
+	"hooks": [
+		{
+			"hook": "static:app.load", "method": "onLoad"
+		}
+	]
 }
