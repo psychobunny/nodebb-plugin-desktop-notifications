@@ -26,8 +26,6 @@
 				Notify.requestPermission(hideAlertBar, hideAlertBar);
 			}
 
-			request();
-
 			if (!notifications.ignore && Notify.permissionLevel !== 'granted') {
 				templates.parse('partials/nodebb-plugin-desktop-notifications/alert-bar', {siteTitle: config.siteTitle}, function(tpl) {
 					components.get('navbar').prepend($(tpl));
