@@ -36,11 +36,11 @@
 
 					$('body').css('padding-top', notifications.originalPadding + parseInt($('.desktop-notification-permission').outerHeight()) + 'px');
 
-					$('.activate-notifications').click(function() {
+					$('.activate-notifications').on('click touchstart', function() {
 						request();
 					});
 
-					$('.deactivate-notifications').click(hideAlertBar);
+					$('.deactivate-notifications').on('click touchstart', hideAlertBar);
 				});
 			}
 		});
