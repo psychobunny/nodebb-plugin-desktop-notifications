@@ -34,7 +34,7 @@
 
 					$('body').css('padding-top', notifications.originalPadding + parseInt($('.desktop-notification-permission').outerHeight()) + 'px');
 
-					$('.activate-notifications').on('click touchstart', function() {
+					$('.desktop-notification-permission').on('click touchstart', function() {
 						request();
 					});
 
