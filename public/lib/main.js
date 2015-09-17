@@ -15,7 +15,7 @@
 
 		function hideAlertBar() {
 			notifications.ignore = true;
-			$('.desktop-notification-permission').hide();
+			$('.desktop-notification-permission').remove();
 			if (notifications.originalPadding) {
 				$('body').css('padding-top', notifications.originalPadding + 'px');
 			}
