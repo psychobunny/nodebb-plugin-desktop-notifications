@@ -64,9 +64,12 @@
 						icon: logo,
 						timeout: 5,
 						notifyClick: function() {
-							if (data.path) {
-								ajaxify.go(data.path.substring(1));
-							}
+							socket.emit('notifications.get', {nids: [data.nid]}, function(err, notifs) { 
+								if (notifs.length) {
+									ajaxify.go(notifs[0].path.substring(1));
+								}
+							});
+							notification.close();
 						}
 					});
 					notification.show();
