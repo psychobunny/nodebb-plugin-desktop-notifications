@@ -1,13 +1,21 @@
 (function(module) {
 	"use strict";
 
-	var Notifications = {},
+	var notifications = {},
 		app;
 
-	Notifications.onLoad = function(params, callback) {
-		app = params.app;
-		callback();
+	notifications.pushed = function(params, callback) {
+		var notification = params.notification,
+			uids = params.uids;
+
+		var socket = module.parent.require('./socket.io'),
+			rooms = module.parent.require('./socket.io/rooms');
+
+		uids.forEach(function(uid) {
+			var id = rooms.clients('uid_' + uid)[0];
+			socket.in(id).emit('event:plugin:desktop_notifications', notification);
+		});
 	};
 
-	module.exports = Notifications;
+	module.exports = notifications;
 }(module));

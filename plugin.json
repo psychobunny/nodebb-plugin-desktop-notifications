@@ -15,7 +15,7 @@
 	"templates": "./public/templates",
 	"hooks": [
 		{
-			"hook": "static:app.load", "method": "onLoad"
+			"hook": "action:notification.pushed", "method": "pushed"
 		}
 	]
 }

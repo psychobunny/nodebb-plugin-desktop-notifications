@@ -49,7 +49,7 @@
 
 		requestPermission();
 		
-		socket.on('event:new_notification', function(data) {
+		socket.on('event:plugin:desktop_notifications', function(data) {
 			if (!data) {
 				return;
 			}
