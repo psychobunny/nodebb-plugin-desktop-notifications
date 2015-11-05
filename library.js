@@ -8,12 +8,10 @@
 		var notification = params.notification,
 			uids = params.uids;
 
-		var socket = module.parent.require('./socket.io'),
-			rooms = module.parent.require('./socket.io/rooms');
+		var socket = module.parent.require('./socket.io');
 
 		uids.forEach(function(uid) {
-			var id = rooms.clients('uid_' + uid)[0];
-			socket.in(id).emit('event:plugin:desktop_notifications', notification);
+			socket.in('uid_' + uid).emit('event:plugin:desktop_notifications', notification);
 		});
 	};
 
