@@ -57,8 +57,8 @@
 			if (!text) {
 				return;
 			}
-			translator.translate(text, function(translated) {
-				require(['notify'], function(Notify) {
+			require(['notify', 'translator'], function(Notify, translator) {
+				translator.translate(text, function(translated) {
 					var notification = new Notify(config.siteTitle, {
 						body: translated.replace(/<strong>/g, '').replace(/<\/strong>/g, ''),
 						icon: logo,
