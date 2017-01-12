@@ -17,8 +17,8 @@
 
 				app.alert({
 					alert_id: 'desktop_notifications',
-					title: 'Desktop Notifications',
-					message: '<strong>' + config.siteTitle + '</strong> needs your permission to activate desktop notifications. Click here to activate.',
+					title: '[[plugins:desktop_notifications.title]]',
+					message: '[[plugins:desktop_notifications.message, ' + config.siteTitle + ']]',
 					type: 'warning',
 					timeout: 0,
 					clickfn: function () {
@@ -29,8 +29,8 @@
 						localStorage.setItem('plugins:desktop_notifications.ignore', 'ignored');
 						app.alert({
 							alert_id: 'desktop_notifications',
-							title: 'Desktop Notifications',
-							message: 'Desktop notifications have been disabled. You can re-enable this via the user profile settings page.',
+							title: '[[plugins:desktop_notifications.title]]',
+							message: '[[plugins:desktop_notifications.ignored]]',
 							type: 'info',
 							timeout: 2500,
 							clickfn: function () {
