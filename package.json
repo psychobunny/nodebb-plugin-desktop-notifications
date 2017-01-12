@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-desktop-notifications",
-  "version": "0.3.0",
+  "version": "0.2.6",
   "description": "NodeBB Desktop Notifications",
   "main": "library.js",
   "scripts": {
@@ -26,7 +26,7 @@
     "url": "https://github.com/psychobunny/nodebb-plugin-desktop-notifications/issues"
   },
   "nbbpm": {
-    "compatibility": "^1.2.0"
+    "compatibility": "^0.9.0"
   },
   "readmeFilename": "README.md",
   "_id": "nodebb-plugin-desktop-notifications@0.0.1",
