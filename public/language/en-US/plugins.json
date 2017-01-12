@@ -1,0 +1,5 @@
+{
+	"desktop_notifications.title": "Desktop Notifications",
+    "desktop_notifications.message": "<strong>%1</strong> needs your permission to activate desktop notifications. Click here to activate.",
+    "desktop_notifications.ignored": "Desktop notifications have been disabled. You can re-enable this via the user profile settings page."
+}
