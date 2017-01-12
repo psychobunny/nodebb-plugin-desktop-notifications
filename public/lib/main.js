@@ -1,53 +1,79 @@
-/*globals app, user, socket, translator, config, ajaxify, templates*/
+/*globals app, socket, config, ajaxify*/
 
 (function() {
 	"use strict";
-
-	var notifications = {
-		ignore: false,
-		originalPadding: 0
-	};
 
 	function requestPermission() {
 		if (parseInt(app.user.uid, 10) === 0) {
 			return;
 		}
 
-		function hideAlertBar() {
-			notifications.ignore = true;
-			$('.desktop-notification-permission').remove();
-			if (notifications.originalPadding) {
-				$('body').css('padding-top', notifications.originalPadding + 'px');
-			}
-		}
+		
+		if (localStorage.getItem('plugins:desktop_notifications.ignore') !== 'ignored') {
+			require(['notify'], function(Notify) {
+				if (!Notify.isSupported) {
+					return;
+				}
 
-		require(['notify', 'components'], function(Notify, components) {
-			function request() {
-				Notify.requestPermission(hideAlertBar, hideAlertBar);
-			}
-
-			if (!notifications.ignore && Notify.permissionLevel !== 'granted') {
-				templates.parse('partials/nodebb-plugin-desktop-notifications/alert-bar', {siteTitle: config.siteTitle}, function(tpl) {
-					components.get('navbar').prepend($(tpl));
-
-					notifications.originalPadding = parseInt($('body').css('padding-top'), 10);
-
-					$('body').css('padding-top', notifications.originalPadding + parseInt($('.desktop-notification-permission').outerHeight()) + 'px');
-
-					$('.activate-notifications').on('click touchstart', function() {
-						request();
-					});
-
-					$('.deactivate-notifications').on('click touchstart', hideAlertBar);
+				app.alert({
+					alert_id: 'desktop_notifications',
+					title: '[[plugins:desktop_notifications.title]]',
+					message: '[[plugins:desktop_notifications.message, ' + config.siteTitle + ']]',
+					type: 'warning',
+					timeout: 0,
+					clickfn: function () {
+						Notify.requestPermission(hideAlertBar, hideAlertBar);
+					},
+					closefn: function () {
+						hideAlertBar();
+						localStorage.setItem('plugins:desktop_notifications.ignore', 'ignored');
+						app.alert({
+							alert_id: 'desktop_notifications',
+							title: '[[plugins:desktop_notifications.title]]',
+							message: '[[plugins:desktop_notifications.ignored]]',
+							type: 'info',
+							timeout: 2500,
+							clickfn: function () {
+								ajaxify.go('user/' + app.user.userslug + '/settings');
+							}
+						});
+					}
 				});
-			}
-		});
+			});
+		}
+	}
+
+	function hideAlertBar() {
+		$('#alert_button_desktop_notifications').remove();
+		localStorage.setItem('plugins:desktop_notifications.ignore', 'ignored');
 	}
 
 	jQuery('document').ready(function() {
 		var logo = $('.forum-logo').attr('src');
 
 		requestPermission();
+
+		$(window).on('action:ajaxify.end', function() {
+			if (ajaxify.data.template.name === 'account/settings') {
+				require(['translator', 'notify'], function(translator, Notify) {
+					if (Notify.permissionLevel === 'granted' || Notify.permissionLevel === 'denied') {
+						return;
+					}
+
+					translator.translate('<h4>Desktop Notifications</h4><div class="well"><button class="btn btn-default">Configure Desktop Notifications</button></div>', function(translated) {
+						var well = $(translated);
+						well.find('button').on('click', function() {
+							localStorage.setItem('plugins:desktop_notifications.ignore', '');
+							require(['notify'], function(Notify) {
+								Notify.requestPermission();
+							});
+						});
+
+						$('.account > .row > *:first-child').append(well);
+					});
+				});
+			}
+		});
 		
 		socket.on('event:plugin:desktop_notifications', function(data) {
 			if (!data) {
