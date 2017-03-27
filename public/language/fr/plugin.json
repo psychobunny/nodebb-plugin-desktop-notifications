@@ -1,0 +1,5 @@
+{
+	"desktop_notifications.title": "Notification bureau",
+  "desktop_notifications.message": "<strong>%1</strong> a besoin de votre permission pour activier les notifications bureau. Cliquez ici pour les activer.",
+  "desktop_notifications.ignored": "Les notifications bureau ont été désactivées. Vous pouvez les réactiver via les options de votre profil utilisateur."
+}
