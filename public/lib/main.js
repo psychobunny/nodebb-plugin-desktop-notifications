@@ -84,8 +84,13 @@
 				return;
 			}
 			require(['notify', 'translator'], function(Notify, translator) {
+				function decodeEntities(encodedString) {
+					var textArea = document.createElement('textarea');
+					textArea.innerHTML = encodedString;
+					return textArea.value;
+				}
 				translator.translate(text, function(translated) {
-					var notification = new Notify(config.siteTitle, {
+					var notification = new Notify(decodeEntities(config.siteTitle), {
 						body: translated.replace(/<strong>/g, '').replace(/<\/strong>/g, ''),
 						icon: logo,
 						timeout: 5,
