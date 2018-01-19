@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-desktop-notifications",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "NodeBB Desktop Notifications",
   "main": "library.js",
   "scripts": {
